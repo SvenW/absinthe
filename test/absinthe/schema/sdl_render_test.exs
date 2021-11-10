@@ -196,7 +196,7 @@ defmodule Absinthe.Schema.SdlRenderTest do
 
       field :echo, :string do
         arg :times, :integer, default_value: 10, description: "The number of times"
-        arg :time_interval, :integer
+        arg :time_interval, :integer, deprecate: "Old interval"
       end
 
       field :search, :search_result
@@ -219,6 +219,7 @@ defmodule Absinthe.Schema.SdlRenderTest do
     object :order do
       field :id, :id
       field :name, :string
+      field :braun, :string, deprecate: "Deprecated"
       field :status, :order_status
       field :other_status, :status
       import_fields :imported_fields
@@ -253,7 +254,7 @@ defmodule Absinthe.Schema.SdlRenderTest do
                  "The number of times"
                  times: Int
 
-                 timeInterval: Int
+                 timeInterval: Int @deprecated(reason: \"Old interval\")
                ): String
                search: SearchResult
              }
@@ -280,6 +281,7 @@ defmodule Absinthe.Schema.SdlRenderTest do
                imported: Boolean!
                id: ID
                name: String
+               braun: String @deprecated(reason: \"Deprecated\")
                status: OrderStatus
                otherStatus: Status
              }
